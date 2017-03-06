@@ -97,41 +97,6 @@ def binary_search3_helper(L, s, start, end):
     return result
 
 def binary_search4(alist, item):
-    # no recursion... do this with a LOOP!
-
-    # set variables equal to start and end indices of the list
-
-    # while start <= end
-
-    # set an index equal to the midway point
-
-    # if alist[middle] == item return middle
-
-    # if item > alist[middle]
-    # recurse on middle + 1 and the end
-    # else
-    # recurse on start to middle - 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def binary_search4(alist, item):
     first = 0
     last = len(alist)-1
     found = False
@@ -159,11 +124,11 @@ if(__name__ == "__main__"):
     print(binary_search(L, 3))
     print(binary_search(L, 15))
 
-    # print(binary_search2(L, 3))
-    # print(binary_search2(L, 15))
-    #
-    # print(binary_search3(L, 3))
-    # print(binary_search3(L, 15))
-    #
-    # print(binary_search4(L, 3))
-    # print(binary_search4(L, 15))
+    print(binary_search2(L, 3))
+    print(binary_search2(L, 15))
+
+    print(binary_search3(L, 3))
+    print(binary_search3(L, 15))
+
+    print(binary_search4(L, 3))
+    print(binary_search4(L, 15))

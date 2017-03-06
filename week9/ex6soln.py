@@ -72,6 +72,88 @@ def _update_smallest(two_smallest, num):
         two_smallest = (two_smallest[0], num)
     return two_smallest
 
+def two_smallest(my_list):
+    """ (list of int) -> tuple of (int, int)
+    CREDIT: Cho Yin Yong
+    Given a list of integers, return the two smallest numbers in the list
+    as a tuple of (int, int)
+
+    REQ: len(my_list) >= 1
+
+    >>> two_smallest([[1, 2], [2, [3]], []])
+    (1, 2)
+    >>> two_smallest([1, 2, [2, 3]])
+    (1, 2)
+    >>> two_smallest([4, 1, 1, 3])
+    (1, 1)
+    >>> two_smallest([[], 1, 1, []])
+    (1, 1)
+    >>> two_smallest([1, [1, 3, [[[[[3, 4]]]]]]])
+    (1, 1)
+    >>> two_smallest([[3], [], 3])
+    (3, 3)
+    >>> two_smallest([[[[2, 2]]]])
+    (2, 2)
+    >>> two_smallest([[], [], 2, 10])
+    (2, 10)
+    >>> two_smallest([0, 0, 0, [], []])
+    (0, 0)
+    >>> two_smallest([[],[[3, 4]]])
+    (3, 4)
+    >>> two_smallest([[],[3, 4]])
+    (3, 4)
+    """
+    # dummy var to return tuple
+    smallest_tuple = tuple()
+
+    # if first element is a list, go in the list
+    if isinstance(my_list[0], list):
+        smallest_tuple = two_smallest(my_list[0] + my_list[1:])
+
+    # if first element is not a list
+    else:
+
+        # second element is a list
+        if isinstance(my_list[1], list):
+            smallest_tuple = two_smallest(my_list[:1] +
+                                          my_list[1] +
+                                          my_list[2:])
+
+        # length of list is two
+        elif len(my_list) == 2:
+
+            # smallest number goes first
+            if my_list[0] > my_list[1]:
+                smallest_tuple = (my_list[1], my_list[0])
+            else:
+                smallest_tuple = (my_list[0], my_list[1])
+
+        # length of list is not 2
+        else:
+
+            # if the third element is a list, decompose it
+            if isinstance(my_list[2], list):
+                smallest_tuple = two_smallest(my_list[:2] +
+                                              my_list[2] +
+                                              my_list[3:])
+            # if third element is int
+            else:
+
+                # remove biggest element
+                if (my_list[0] > my_list[1] and
+                    my_list[0] > my_list[2]):
+                    smallest_tuple = two_smallest(my_list[1:])
+
+                elif (my_list[1] > my_list[0] and
+                      my_list[1] > my_list[2]):
+                    smallest_tuple = two_smallest(my_list[:1] +
+                                                  my_list[2:])
+                else:
+                    smallest_tuple = two_smallest(my_list[:2] +
+                                                  my_list[3:])
+
+    return smallest_tuple
+
 
 if(__name__ == "__main__"):
     print(rsum([1,2,3, [1, [100, []], 2, 3]]))
